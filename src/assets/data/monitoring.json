@@ -39,119 +39,136 @@
 
             ],
             "queue": "aws_sqs",
-            "size": 1
+            "size": 1,
+            "title": "AWS SQS"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "aws_update_distinct_state_contacts_count",
-            "size": 0
+            "size": 0,
+            "title": "AWS Update Distinct State Contacts Count"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "billing",
-            "size": 0
+            "size": 0,
+            "title": "Billing"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "bulk_email",
-            "size": 0
+            "size": 0,
+            "title": "Bulk Email"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "chat_archiver",
-            "size": 0
+            "size": 0,
+            "title": "Chat Archiver"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "contact_import",
-            "size": 0
+            "size": 0,
+            "title": "Contact Import"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "default",
-            "size": 0
+            "size": 0,
+            "title": "Default"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "ecard_send_mail",
-            "size": 0
+            "size": 0,
+            "title": "eCard Send Mail"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "email",
-            "size": 0
+            "size": 0,
+            "title": "Email"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "etl",
-            "size": 0
+            "size": 0,
+            "title": "ETL"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "future_actions",
-            "size": 0
+            "size": 0,
+            "title": "Future Actions"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "generate_file_from_report",
-            "size": 0
+            "size": 0,
+            "title": "Generate File from Report"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "misc",
-            "size": 0
+            "size": 0,
+            "title": "Misc"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "product_pull",
-            "size": 0
+            "size": 0,
+            "title": "Product Pull"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "progress_report",
-            "size": 0
+            "size": 0,
+            "title": "Product Report"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "report_export_bulk_direct_message",
-            "size": 0
+            "size": 0,
+            "title": "Report Export Bulk Direct Message"
           },
           {
             "pending_jobs": [
 
             ],
             "queue": "system",
-            "size": 0
+            "size": 0,
+            "title": "System"
           }
         ]
       },
