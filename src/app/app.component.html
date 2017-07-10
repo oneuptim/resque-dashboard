@@ -1,7 +1,7 @@
 <div fxLayout="column" fxFlex [class.dark-theme]="isDarkTheme">
 
   <md-toolbar color="primary">
-    <span>Angular Material</span>
+    <span>Resque Dashboard</span>
 
     <!-- Filler that pushes the menu button to the end of the toolbar -->
     <span fxFlex></span>
@@ -14,33 +14,54 @@
 
   <md-sidenav-container fxFlex>
     <md-sidenav mode="side" opened>
-
-      <md-tab-group>
-        <md-tab label="Users">
-          <md-nav-list>
-            <md-list-item *ngFor="let user of users" (click)="selectedUser = user">
-              <md-icon svgIcon="avatars:{{user.avatar}}" class="avatar"></md-icon>
-              <span>{{user.name}}</span>
+      <md-tab-group (selectChange)="selectTab($event)">
+        <md-tab label="Queues" >
+          <md-nav-list>         
+            <md-list-item *ngFor="let item of queues" (click)="selectedItem = item; switchDetailsView = true">
+              <span>{{item.title}}</span>                     
             </md-list-item>
           </md-nav-list>
         </md-tab>
-        <md-tab label="Settings">
-          <span>Settings</span>
+        <md-tab label="Workers">
+          <md-nav-list>
+            <md-list-item *ngFor="let worker of workers; let i = index" (click)="selectedWorker = worker;  switchDetailsView = false">
+              <span>Worker #{{i}}</span>                     
+            </md-list-item>
+          </md-nav-list>
         </md-tab>
       </md-tab-group>
 
     </md-sidenav>
     <div class="content" fxLayout="row" fxLayout.sm="column" fxLayoutGap="16px">
 
-      <md-card fxFlex="80">
-        <md-icon svgIcon="avatars:{{selectedUser.avatar}}" class="avatar"></md-icon>
-        <h2>{{selectedUser.name}}</h2>
-        <p>{{selectedUser.details}}</p>
+      <md-card fxFlex="70" *ngIf="switchDetailsView">
+        <h3>{{selectedItem.title}}</h3>
+        <md-divider flex></md-divider>
+        <p>Queue Name <br><span>{{selectedItem.queue}}</span></p>
+        <p>Size <br><span class="default">{{selectedItem.size}}</span></p>            
+      </md-card>
+
+      <md-card fxFlex="70" *ngIf="!switchDetailsView">
+        <h3>Worker {{selectedWorker.index}}</h3> 
+        <md-divider flex></md-divider>             
+        <p>Host <br><span>{{selectedWorker.host}}</span></p>
+        <p>PID <br><span>{{selectedWorker.pid}}</span></p>
+        <p>Queues <br><span>{{selectedWorker.queues}}</span></p>
+        <p>To S <br><span>{{selectedWorker.to_s}}</span></p>    
       </md-card>
 
       <md-card fxFlex fxLayout="column" fxLayoutGap="14px">
-        <md-slide-toggle [(ngModel)]="selectedUser.isAdmin">Is Admin?</md-slide-toggle>
-        <md-slide-toggle [(ngModel)]="selectedUser.isCool">Is Cool?</md-slide-toggle>
+        <h3>Versions</h3>
+          <md-divider flex></md-divider>
+          <p>Downward dog barefoot running trust the process quinoa, compostable toilet root chakra.</p>
+        <h3>Resque Stats</h3>
+          <md-divider flex></md-divider>        
+          <p>Pending<br><span class="warning">{{resqueObj.pending | number}}</span></p> 
+          <p>Processed<br><span> {{resqueObj.processed | number}}</span></p> 
+          <p>Queues<br><span> {{resqueObj.queues | number}}</span></p> 
+          <p>Workers<br><span> {{resqueObj.workers | number}}</span></p> 
+          <p>Working<br><span> {{resqueObj.working | number}}</span></p> 
+          <p>Failed<br><span class="danger"> {{resqueObj.failed | number}}</span></p> 
       </md-card>
       
     </div>
@@ -50,8 +71,8 @@
     <button md-menu-item (click)="isDarkTheme = !isDarkTheme">Toggle Theme</button>
   </md-menu>
 
-  <button md-fab (click)="openAdminDialog()" class="fab-bottom-right">
+  <!--<button md-fab (click)="openAdminDialog()" class="fab-bottom-right">
     <md-icon>add</md-icon>
-  </button>
+  </button>-->
 
 </div>

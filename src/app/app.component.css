@@ -7,6 +7,11 @@ md-sidenav {
   width: 320px;
 }
 
+md-sidenav span {
+  font-size: 0.8em;
+  font-weight: 400;
+  color: #bfbfbf;
+}
 .content {
   padding: 12px;
 }
@@ -26,5 +31,23 @@ md-sidenav {
 }
 
 /deep/ .mat-list-item-content {
-  height: auto !important;
+   padding: 30px 55px!important;  
+  /*height: auto !important;*/
+}
+
+p span  {
+  font-size: 1.8em;
+  color: #4caf50;
+  font-weight: 100;
+}
+
+.default {
+  color: #b7b7b7!important;
+}
+ .danger {
+  color: #ff0000!important;
+}
+
+.warning {
+  color: #e6bf20!important;
 }
