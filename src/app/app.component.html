@@ -53,11 +53,7 @@
       <md-card fxFlex fxLayout="column" fxLayoutGap="14px">
         <h3>Versions</h3>
           <md-divider flex></md-divider>
-            <md-nav-list>         
-              <!--<md-list-item *ngFor="let item of queues" (click)="selectedItem = item; switchDetailsView = true">-->
-                <span></span>                     
-              </md-list-item>
-            </md-nav-list>
+
         <h3>Resque Stats</h3>
           <md-divider flex></md-divider>        
           <p>Pending<br><span class="warning">{{resqueObj.pending | number}}</span></p> 
