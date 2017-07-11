@@ -5,6 +5,9 @@ import {DialogComponent} from './dialog/dialog.component';
 import {Http, Response} from '@angular/http';
 import {Injectable} from '@angular/core';
 import 'rxjs/add/operator/map';
+import { Pipe, PipeTransform } from '@angular/core';
+import {MdGridListModule} from '@angular/material';
+
 
 @Component({
   selector: 'app-root',
@@ -13,6 +16,9 @@ import 'rxjs/add/operator/map';
 })
 
 @Injectable()
+
+@Pipe({name: 'keys'})
+
 export class AppComponent {
   private _url:string = 'assets/data/monitoring.json';
   private _checksumsUrl:string = 'assets/data/versions.json';
@@ -37,6 +43,7 @@ export class AppComponent {
       this.resque = data;
       this.queues = data.monitoring_json.overview.queues.all_queues
       this.workers = data.monitoring_json.overview.working.workers_info
+      console.log(this.workers);
       this.resqueObj = data.monitoring_json.stats_overview.resque
       this.selectedItem = this.queues[0];
       this.selectedWorker = this.workers[0];
@@ -69,10 +76,6 @@ export class AppComponent {
       this.selectedWorker = this.workers[0];    
     }
   }
-
-  // private selectListItem($event) {
-  //   console.log($event);
-  // }
   
   private openAdminDialog() {
     this.dialog.open(DialogComponent).afterClosed()
@@ -84,3 +87,19 @@ export class AppComponent {
   }
 
 }
+
+
+
+
+// Resque Stats
+// Redis
+// Versions
+
+// Upto date button/badge next to versions
+
+// Keys icon
+
+
+
+// Add extra
+// Add status

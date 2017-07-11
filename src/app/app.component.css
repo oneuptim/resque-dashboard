@@ -4,7 +4,7 @@
 }
 
 md-sidenav {
-  width: 320px;
+  width: 420px;
 }
 
 md-sidenav span {
@@ -36,7 +36,7 @@ md-sidenav span {
 }
 
 p span  {
-  font-size: 1.8em;
+  font-size: 1.2em;
   color: #4caf50;
   font-weight: 100;
 }
