@@ -17,8 +17,11 @@
       <md-tab-group (selectChange)="selectTab($event)">
         <md-tab label="Queues" >
           <md-nav-list>         
-            <md-list-item *ngFor="let item of queues" (click)="selectedItem = item; switchDetailsView = true">
+            <!--<md-list-item *ngFor="let item of queues" (click)="selectedItem = item; switchDetailsView = true">
               <span>{{item.title}}</span>                     
+            </md-list-item>-->
+            <md-list-item *ngFor='redisItem of redis | values:"key":true'>
+               <!--<span>{{redisItem}}</span> -->
             </md-list-item>
           </md-nav-list>
         </md-tab>
@@ -34,13 +37,12 @@
             <md-icon>vpn_key</md-icon>
           </md-tab-label>-->
           <md-nav-list>
-            <!--<md-list-item *ngFor="let worker of workers; let i = index" (click)="selectedWorker = worker;  switchDetailsView = false">-->
-              <!--<span>Worker - PID {{worker.pid}}</span>                     -->
-            <!--</md-list-item>-->
+            <md-list-item *ngFor="let key of keys" (click)="selectedKey = keys;  viewKeys = true">
+              <span>{{key.key}}</span>                                  
+            </md-list-item>
           </md-nav-list>
         </md-tab>
       </md-tab-group>
-
     </md-sidenav>
     <div class="content" fxLayout="row" fxLayout.sm="column" fxLayoutGap="16px">
 
@@ -64,6 +66,13 @@
         <p>Heartbeat<br><span>{{selectedWorker.status.heartbeat | date:'medium'}}</span></p>
         <p>Processed<br><span>{{selectedWorker.status.processed}}</span></p>          
         <p>Started<br><span>{{selectedWorker.status.started | date:'medium'}}</span></p>
+      </md-card>
+
+      <md-card fxFlex="60" *ngIf="viewKeys">
+        <h3>{{selectedKey.key}}</h3>
+        <md-divider flex></md-divider>
+        <p>Queue Name <br><span>{{selectedKey.size}}</span></p>
+        <p>Size <br><span class="default">{{selectedKey.type}}</span></p>            
       </md-card>
 
       <md-card fxFlex fxLayout="column" fxLayoutGap="14px">
