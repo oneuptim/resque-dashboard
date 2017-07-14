@@ -59,7 +59,17 @@ export class AppComponent {
   selectedWorker:any = {};
   isDarkTheme:any = true;
   switchDetailsView:any = true;
-
+  redis_version: string;
+  redis_mode: string;
+  os: string;
+  arch_bits: string;
+  used_memory_human: string;
+  used_memory_peak_human: string;
+  mem_allocator: string;
+  used_cpu_sys: string;
+  used_cpu_user: string;
+  used_cpu_sys_children: string;
+  used_cpu_user_children: string;
 
   constructor(iconRegistry: MdIconRegistry, sanitizer: DomSanitizer, private dialog: MdDialog, private _http:Http) {
     // To avoid XSS attacks, the URL needs to be trusted from inside of your application.
@@ -74,7 +84,17 @@ export class AppComponent {
       this.workers = data.monitoring_json.overview.working.workers_info;
       this.keys = data.monitoring_json.stats_overview.keys;
       this.redis = data.monitoring_json.stats_overview.redis;
-      console.log(this.redis, 'redis');
+      this.redis_version = data.monitoring_json.stats_overview.redis.redis_version;
+      this.redis_mode = data.monitoring_json.stats_overview.redis.redis_mode;
+      this.os = data.monitoring_json.stats_overview.redis.os;
+      this.arch_bits = data.monitoring_json.stats_overview.redis.arch_bits;
+      this.used_memory_human = data.monitoring_json.stats_overview.redis.used_memory_human;
+      this.used_memory_peak_human = data.monitoring_json.stats_overview.redis.used_memory_peak_human;
+      this.mem_allocator = data.monitoring_json.stats_overview.redis.mem_allocator;
+      this.used_cpu_sys = data.monitoring_json.stats_overview.redis.used_cpu_sys;
+      this.used_cpu_user = data.monitoring_json.stats_overview.redis.used_cpu_user;
+      this.used_cpu_sys_children = data.monitoring_json.stats_overview.redis.used_cpu_sys_children;
+      this.used_cpu_user_children = data.monitoring_json.stats_overview.redis.used_cpu_user_children;
       this.resqueObj = data.monitoring_json.stats_overview.resque;
       this.selectedItem = this.queues[0];
       this.selectedWorker = this.workers[0];

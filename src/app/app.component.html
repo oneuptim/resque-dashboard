@@ -17,7 +17,9 @@
       <md-tab-group (selectChange)="selectTab($event)">
         <md-tab label="Queues" >
           <md-nav-list>         
-            <!--Something here-->
+            <md-list-item *ngFor="let item of queues" (click)="selectedItem = item; switchDetailsView = true">
+              <span>{{item.title}}</span>                     
+            </md-list-item>
           </md-nav-list>
         </md-tab>
         <md-tab label="Workers">
@@ -82,17 +84,17 @@
 
       <md-divider flex></md-divider>
           <h3>Redis Stats</h3>
-          <p>Redis Version: <br><span>{{redis.redis_version}}</span></p>
-          <p>Mode: <br><span>{{redis.redis_mode}}</span></p>
-          <p>OS: <br><span>{{redis.os}}</span></p>
-          <p>Arch Bits: <br><span>{{redis.arch_bits}}</span></p>
-          <p>Used Memory Human: <br><span>{{redis.used_memory_human}}</span></p>
-          <p>Memory Peak Human: <br><span>{{redis.used_memory_peak_human}}</span></p>
-          <p>Memory Allocator: <br><span>{{redis.mem_allocator}}</span></p>
-          <p>Used CPU Sys: <br><span>{{redis.used_cpu_sys}}</span></p>
-          <p>Used CPU User: <br><span>{{redis.used_cpu_user}}</span></p>
-          <p>Used CPU Sys Children: <br><span>{{redis.used_cpu_sys_children}}</span></p>      
-          <p>Used CPU User Children: <br><span>{{redis.used_cpu_user_children}}</span></p>            
+          <p>Redis Version <br><span>{{redis_version}}</span></p>
+          <p>Mode <br><span>{{redis_mode}}</span></p>
+          <p>OS <br><span>{{os}}</span></p>
+          <p>Arch Bits <br><span>{{arch_bits}}</span></p>
+          <p>Used Memory Human <br><span>{{used_memory_human}}</span></p>
+          <p>Memory Peak Human <br><span>{{used_memory_peak_human}}</span></p>
+          <p>Memory Allocator <br><span>{{mem_allocator}}</span></p>
+          <p>Used CPU Sys <br><span>{{used_cpu_sys}}</span></p>
+          <p>Used CPU User <br><span>{{used_cpu_user}}</span></p>
+          <p>Used CPU Sys Children <br><span>{{used_cpu_sys_children}}</span></p>      
+          <p>Used CPU User Children <br><span>{{used_cpu_user_children}}</span></p>            
       </md-card>
 
 

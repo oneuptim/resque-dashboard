@@ -51,3 +51,18 @@ p span  {
 .warning {
   color: #e6bf20!important;
 }
+
+.dark-theme .mat-card {
+    background: #222324;
+    color: white;
+}
+
+.dark-theme .mat-sidenav {
+    background-color: #222324;
+    color: white;
+}
+
+.dark-theme .mat-sidenav-container {
+    background-color: #1e1e1e;
+    color: white;
+}
