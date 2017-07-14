@@ -17,12 +17,7 @@
       <md-tab-group (selectChange)="selectTab($event)">
         <md-tab label="Queues" >
           <md-nav-list>         
-            <!--<md-list-item *ngFor="let item of queues" (click)="selectedItem = item; switchDetailsView = true">
-              <span>{{item.title}}</span>                     
-            </md-list-item>-->
-            <md-list-item *ngFor='redisItem of redis | values:"key":true'>
-               <!--<span>{{redisItem}}</span> -->
-            </md-list-item>
+            <!--Something here-->
           </md-nav-list>
         </md-tab>
         <md-tab label="Workers">
@@ -86,6 +81,18 @@
           <p>Failed<br><span class="danger"> {{resqueObj.failed | number}}</span></p> 
 
       <md-divider flex></md-divider>
+          <h3>Redis Stats</h3>
+          <p>Redis Version: <br><span>{{redis.redis_version}}</span></p>
+          <p>Mode: <br><span>{{redis.redis_mode}}</span></p>
+          <p>OS: <br><span>{{redis.os}}</span></p>
+          <p>Arch Bits: <br><span>{{redis.arch_bits}}</span></p>
+          <p>Used Memory Human: <br><span>{{redis.used_memory_human}}</span></p>
+          <p>Memory Peak Human: <br><span>{{redis.used_memory_peak_human}}</span></p>
+          <p>Memory Allocator: <br><span>{{redis.mem_allocator}}</span></p>
+          <p>Used CPU Sys: <br><span>{{redis.used_cpu_sys}}</span></p>
+          <p>Used CPU User: <br><span>{{redis.used_cpu_user}}</span></p>
+          <p>Used CPU Sys Children: <br><span>{{redis.used_cpu_sys_children}}</span></p>      
+          <p>Used CPU User Children: <br><span>{{redis.used_cpu_user_children}}</span></p>            
       </md-card>
 
 

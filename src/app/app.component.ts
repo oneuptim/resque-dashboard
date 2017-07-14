@@ -74,7 +74,7 @@ export class AppComponent {
       this.workers = data.monitoring_json.overview.working.workers_info;
       this.keys = data.monitoring_json.stats_overview.keys;
       this.redis = data.monitoring_json.stats_overview.redis;
-      console.log(this.redis);
+      console.log(this.redis, 'redis');
       this.resqueObj = data.monitoring_json.stats_overview.resque;
       this.selectedItem = this.queues[0];
       this.selectedWorker = this.workers[0];
