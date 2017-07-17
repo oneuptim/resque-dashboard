@@ -111,31 +111,33 @@ export class AppComponent {
 
   private _url:string = 'assets/data/monitoring.json';
   private _checksumsUrl:string = 'assets/data/versions.json';
-  resque:any = {};  
-  checksums:any = [];
-  queues:any = [];
-  workers:any = [];
-  keys:any;
-  public redis:Object;
-  resqueObj:any = {};
-  selectedItem:any = {};
-  selectedWorker:any = {};
-  isDarkTheme:any = true;
-  switchDetailsView:any = true;
-  redis_version: string;
-  redis_mode: string;
-  os: string;
-  arch_bits: string;
-  used_memory_human: string;
-  used_memory_peak_human: string;
-  mem_allocator: string;
-  used_cpu_sys: string;
-  used_cpu_user: string;
-  used_cpu_sys_children: string;
-  used_cpu_user_children: string;
+  resque :any = {};  
+  checksums :any = [];
+  queues :any = [];
+  workers :any = [];
+  keys :any;
+  public redis :Object;
+  resqueObj :any = {};
+  selectedItem :any = {};
+  selectedWorker :any = {};
+  selectedKey : any = {};
+  isDarkTheme :any = true;
+  switchDetailsView :any = 0;
+  redis_version :string;
+  redis_mode :string;
+  os :string;
+  arch_bits:string;
+  used_memory_human :string;
+  used_memory_peak_human :string;
+  mem_allocator :string;
+  used_cpu_sys :string;
+  used_cpu_user :string;
+  used_cpu_sys_children :string;
+  used_cpu_user_children :string;
+  viewKeys :any = false;
+  keysCtrl :FormControl;
+  filteredKeys :any;
 
-  keysCtrl: FormControl;
-  filteredKeys: any;
 
   constructor(iconRegistry: MdIconRegistry, sanitizer: DomSanitizer, private dialog: MdDialog, private _http:Http) {
     // To avoid XSS attacks, the URL needs to be trusted from inside of your application.
@@ -163,6 +165,7 @@ export class AppComponent {
       this.resqueObj = data.monitoring_json.stats_overview.resque;
       this.selectedItem = this.queues[0];
       this.selectedWorker = this.workers[0];
+      // this.selectedKey = this.keys[0];
 
       this.filteredKeys = this.keysCtrl.valueChanges
               .startWith(null)
@@ -203,13 +206,20 @@ export class AppComponent {
     .map((res:Response) => res.json());
   }
 
+
+
   private selectTab($event) {
+    console.log('tab triggered');
     if($event.index == 0) {
-      this.switchDetailsView = true;      
+      this.switchDetailsView = 0;      
       this.selectedItem = this.queues[0];   
-  } else {
-      this.switchDetailsView = false;
+  } else if($event.index == 1) {
+      this.switchDetailsView = 1;
       this.selectedWorker = this.workers[0];    
+    } else {
+      this.switchDetailsView = 2;
+      // this.getKeyByFilter(this.keys);
+
     }
   }
   
@@ -222,9 +232,32 @@ export class AppComponent {
       });
   }
 
+  getKeyByFilter(name){
+    console.log(name, '<--- getFilter Hit and that is the name');
+    let extractedValue = this.keys.filter(x => x.key === name);
+    this.selectedKey = extractedValue[0];
+    console.log(extractedValue[0]);
+    return extractedValue;
+    // return this.keys.filter(x => x.name === name);
+  }
+  // triggerKeyFilter() {
+  //   console.log('key filter triggered');
+  //   // if (this.switchDetailsView = false) {
+  //   //   this.switchDetailsView = true;
+  //   //   this.viewKeys = true;
+  //   //   console.log(this.viewKeys, '<-- view keys status');
+  //   // } else if (this.switchDetailsView = true) {
+  //   //   this.switchDetailsView = false;
+  //   // }
+  // }
+
 }
 
 
+
+// Queue - switchView true
+// Worker - switchView false
+// Keys - 
 
 
 // Resque Stats

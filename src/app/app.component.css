@@ -141,3 +141,10 @@ input::-webkit-input-placeholder {
 	background-color: #fff;
 	cursor: auto;
 }
+
+.mat-focused {
+	width: 76%;
+	color: #fff;
+	cursor: auto;
+  transition: all .5s;
+}

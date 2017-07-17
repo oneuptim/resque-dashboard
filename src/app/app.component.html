@@ -5,12 +5,12 @@
     <!-- Filler that pushes the menu button to the end of the toolbar -->
     <span fxFlex></span>
     <md-input-container>
-      <input mdInput placeholder="Search Keys" [mdAutocomplete]="auto" [formControl]="keysCtrl">
+      <input mdInput placeholder="Search Keys" [mdAutocomplete]="auto" [formControl]="keysCtrl" (click)="selectTab($event)" [(ngModel)]="key">
     </md-input-container>
 
     <md-autocomplete #auto="mdAutocomplete">
-      <md-option *ngFor="let value of filteredKeys | async" [value]="value">
-        {{ value }}
+      <md-option *ngFor="let key of filteredKeys | async; let i = index" [value]="key" (blur)="getKeyByFilter(key)">
+        {{ key }} {{ i }}
       </md-option>
     </md-autocomplete>
 
@@ -23,55 +23,34 @@
       <md-tab-group (selectChange)="selectTab($event)">
         <md-tab label="Queues" >
           <md-nav-list>         
-            <md-list-item *ngFor="let item of queues" (click)="selectedItem = item; switchDetailsView = true">
+            <md-list-item *ngFor="let item of queues" (click)="selectedItem = item; switchDetailsView = 0">
               <span>{{item.title}}</span>                     
             </md-list-item>
           </md-nav-list>
         </md-tab>
         <md-tab label="Workers">
           <md-nav-list>
-            <md-list-item *ngFor="let worker of workers; let i = index" (click)="selectedWorker = worker;  switchDetailsView = false">
+            <md-list-item *ngFor="let worker of workers; let i = index" (click)="selectedWorker = worker; switchDetailsView = 1">
               <span>Worker - PID {{worker.pid}}</span>                     
             </md-list-item>
           </md-nav-list>
         </md-tab>
-        <md-tab label="Keys">        
-          <!--<md-tab-label>
-            <md-icon>vpn_key</md-icon>
-          </md-tab-label>-->
-          <md-nav-list>
-            <!--Filter keys-->
-            <!--<md-list-item *ngFor="let key of keys | filter:term" (click)="selectedKey = keys;  viewKeys = true">            -->
-            <md-list-item *ngFor="let key of keys" (click)="selectedKey = keys;  viewKeys = true">
-              <span>{{key.key}}</span>                                  
-            </md-list-item>
-          </md-nav-list>
-        </md-tab>
+        <!--<md-list-item *ngFor="let key of keys | filter:term" (click)="selectedKey = keys;  viewKeys = true">            -->
+
       </md-tab-group>
     </md-sidenav>
     <div class="content" fxLayout="row" fxLayout.sm="column" fxLayoutGap="16px">
 
-      <md-card fxFlex="60" *ngIf="switchDetailsView">
+      <!--Shows Queues panel-->
+      <md-card fxFlex="60" *ngIf="switchDetailsView == 0">
         <h3>{{selectedItem.title}}</h3>
         <md-divider flex></md-divider>
         <p>Queue Name <br><span>{{selectedItem.queue}}</span></p>
         <p>Size <br><span class="default">{{selectedItem.size}}</span></p>            
       </md-card>
 
-      <md-card fxFlex="60" *ngIf="!switchDetailsView">
-
-
-
-
-
-
-
-
-
-
-
-
-
+      <!--Shows workers panel-->
+      <md-card fxFlex="60" *ngIf="switchDetailsView == 1">
         <h3>Worker PID - {{selectedWorker.pid}} ({{selectedWorker.status.processing.state}})</h3> 
         <md-divider flex></md-divider>             
         <p>Host <br><span>{{selectedWorker.host}}</span></p>
@@ -86,11 +65,13 @@
         <p>Started<br><span>{{selectedWorker.status.started | date:'medium'}}</span></p>
       </md-card>
 
-      <md-card fxFlex="60" *ngIf="viewKeys">
-        <h3>{{selectedKey.key}}</h3>
+      <!--Shows Keys panel-->
+      <md-card fxFlex="60" *ngIf="switchDetailsView == 2">
+        <p>Key view</p>
+        <h3>Key: {{selectedKey.key}}</h3>
         <md-divider flex></md-divider>
-        <p>Queue Name <br><span>{{selectedKey.size}}</span></p>
-        <p>Size <br><span class="default">{{selectedKey.type}}</span></p>            
+        <p>Size <br><span>{{selectedKey.size}}</span></p>
+        <p>Type <br><span class="default">{{selectedKey.type}}</span></p>            
       </md-card>
 
       <md-card fxFlex fxLayout="column" fxLayoutGap="14px">

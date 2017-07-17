@@ -27,3 +27,7 @@ html, body {
     font-size: 1.2em;
     font-weight: 200;
 }
+
+.mat-toolbar-row {
+    padding-left: 30px;
+}
