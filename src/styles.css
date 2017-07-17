@@ -14,9 +14,9 @@ html, body {
     height: 80px;
 }
 
-.mat-tab-label[_ngcontent-c5] {
-    line-height: 80px;
-    height: 80px;
+.mat-tab-label {
+    line-height: 80px!important;
+    height: 80px!important;
     padding: 0 12px;
     cursor: pointer;
     box-sizing: border-box;
@@ -24,8 +24,8 @@ html, body {
     min-width: 160px;
     text-align: center;
     position: relative;
-    font-size: 1.2em;
-    font-weight: 200;
+    font-size: 0.9em!important;
+    font-weight: 200!important;
 }
 
 .mat-toolbar-row {
