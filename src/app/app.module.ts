@@ -13,6 +13,9 @@ import {DialogComponent} from './dialog/dialog.component';
 import 'hammerjs';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +28,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpModule,
     MaterialModule,
     FlexLayoutModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   entryComponents: [DialogComponent],

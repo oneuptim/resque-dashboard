@@ -2,35 +2,10 @@
 
   <md-toolbar color="primary">
     <span>Resque Dashboard</span>
-
-
-          <md-autocomplete
-          ng-disabled="ctrl.isDisabled"
-          md-no-cache="ctrl.noCache"
-          md-selected-item="ctrl.selectedItem"
-          md-search-text-change="ctrl.searchTextChange(ctrl.searchText)"
-          md-search-text="ctrl.searchText"
-          md-selected-item-change="ctrl.selectedItemChange(item)"
-          md-items="item in ctrl.querySearch(ctrl.searchText)"
-          md-item-text="item.display"
-          md-min-length="0"
-          placeholder="What is your favorite US state?">
-
-          <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i"></span>
-
-
-          No states matching were found.
-          <a ng-click="ctrl.newState()">Create a new one!</a>
-
-      </md-autocomplete>
-
-
     <!-- Filler that pushes the menu button to the end of the toolbar -->
     <span fxFlex></span>
 
-    <button md-icon-button [mdMenuTriggerFor]="themeMenu">
-      <md-icon>more_vert</md-icon>
-    </button>
+      <input type="search" id="expanding-search" [(ngModel)]="term">
 
   </md-toolbar>
 
@@ -56,7 +31,8 @@
             <md-icon>vpn_key</md-icon>
           </md-tab-label>-->
           <md-nav-list>
-            <md-list-item *ngFor="let key of keys" (click)="selectedKey = keys;  viewKeys = true">
+            <!--Filter keys-->
+            <md-list-item *ngFor="let key of keys | filter:term" (click)="selectedKey = keys;  viewKeys = true">
               <span>{{key.key}}</span>                                  
             </md-list-item>
           </md-nav-list>
