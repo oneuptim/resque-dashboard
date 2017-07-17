@@ -4,9 +4,18 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {DialogComponent} from './dialog/dialog.component';
 import {Http, Response} from '@angular/http';
 import {Injectable} from '@angular/core';
+
+import { FormControl } from '@angular/forms';
+import { FormsModule }   from '@angular/forms';
+
+import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+
 import { Pipe, PipeTransform } from '@angular/core';
 import {MdGridListModule} from '@angular/material';
+import {MdAutocompleteModule} from '@angular/material';
+
+
 
 @Pipe({name: 'values'})
 export class ValuesPipe implements PipeTransform {
@@ -46,13 +55,67 @@ export class ValuesPipe implements PipeTransform {
 @Pipe({name: 'keys'})
 
 export class AppComponent {
+
+  states = [
+    'Alabama',
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'Florida',
+    'Georgia',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Carolina',
+    'North Dakota',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Pennsylvania',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Vermont',
+    'Virginia',
+    'Washington',
+    'West Virginia',
+    'Wisconsin',
+    'Wyoming',
+  ];
+
   private _url:string = 'assets/data/monitoring.json';
   private _checksumsUrl:string = 'assets/data/versions.json';
   resque:any = {};  
   checksums:any = [];
   queues:any = [];
   workers:any = [];
-  keys:any = [];
+  keys:any;
   public redis:Object;
   resqueObj:any = {};
   selectedItem:any = {};
@@ -71,6 +134,9 @@ export class AppComponent {
   used_cpu_sys_children: string;
   used_cpu_user_children: string;
 
+  keysCtrl: FormControl;
+  filteredKeys: any;
+
   constructor(iconRegistry: MdIconRegistry, sanitizer: DomSanitizer, private dialog: MdDialog, private _http:Http) {
     // To avoid XSS attacks, the URL needs to be trusted from inside of your application.
     const avatarsSafeUrl = sanitizer.bypassSecurityTrustResourceUrl('./assets/avatars.svg');
@@ -79,7 +145,6 @@ export class AppComponent {
     // Step 2
     this.getMonitoringData().subscribe((data) => {
       this.resque = data;
-      console.log(this.resque);
       this.queues = data.monitoring_json.overview.queues.all_queues;
       this.workers = data.monitoring_json.overview.working.workers_info;
       this.keys = data.monitoring_json.stats_overview.keys;
@@ -98,6 +163,11 @@ export class AppComponent {
       this.resqueObj = data.monitoring_json.stats_overview.resque;
       this.selectedItem = this.queues[0];
       this.selectedWorker = this.workers[0];
+
+      this.filteredKeys = this.keysCtrl.valueChanges
+              .startWith(null)
+              .map(name => this.filterKeys(name));
+
     });
 
     this.getChecksumsData().subscribe((data) => {
@@ -105,7 +175,22 @@ export class AppComponent {
       // console.log(data);
     });
 
+    this.keysCtrl = new FormControl();
+    
+  
+
   } // End of constructor
+
+
+  filterKeys(val: string) {
+    let keysNames = [];
+    for (var i = 0; i <= this.keys.length - 1; i++) {
+      keysNames.push(this.keys[i].key);
+    }
+    return val ? keysNames.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0)
+               : keysNames;
+  }
+
 
   // Step 1
   private getMonitoringData() {

@@ -4,8 +4,17 @@
     <span>Resque Dashboard</span>
     <!-- Filler that pushes the menu button to the end of the toolbar -->
     <span fxFlex></span>
+    <md-input-container>
+      <input mdInput placeholder="Search Keys" [mdAutocomplete]="auto" [formControl]="keysCtrl">
+    </md-input-container>
 
-      <input type="search" id="expanding-search" [(ngModel)]="term">
+    <md-autocomplete #auto="mdAutocomplete">
+      <md-option *ngFor="let value of filteredKeys | async" [value]="value">
+        {{ value }}
+      </md-option>
+    </md-autocomplete>
+
+      <!--<input type="search" id="expanding-search" [(ngModel)]="term">-->
 
   </md-toolbar>
 
@@ -32,7 +41,8 @@
           </md-tab-label>-->
           <md-nav-list>
             <!--Filter keys-->
-            <md-list-item *ngFor="let key of keys | filter:term" (click)="selectedKey = keys;  viewKeys = true">
+            <!--<md-list-item *ngFor="let key of keys | filter:term" (click)="selectedKey = keys;  viewKeys = true">            -->
+            <md-list-item *ngFor="let key of keys" (click)="selectedKey = keys;  viewKeys = true">
               <span>{{key.key}}</span>                                  
             </md-list-item>
           </md-nav-list>
@@ -49,6 +59,19 @@
       </md-card>
 
       <md-card fxFlex="60" *ngIf="!switchDetailsView">
+
+
+
+
+
+
+
+
+
+
+
+
+
         <h3>Worker PID - {{selectedWorker.pid}} ({{selectedWorker.status.processing.state}})</h3> 
         <md-divider flex></md-divider>             
         <p>Host <br><span>{{selectedWorker.host}}</span></p>
