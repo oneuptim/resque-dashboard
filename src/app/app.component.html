@@ -47,6 +47,20 @@
         <md-divider flex></md-divider>
         <p>Queue Name <br><span>{{selectedItem.queue}}</span></p>
         <p>Size <br><span class="default">{{selectedItem.size}}</span></p>            
+
+        <div style="display: block">
+          <canvas baseChart
+            [data]="doughnutChartData"
+            [labels]="doughnutChartLabels"
+            [chartType]="doughnutChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)">
+          </canvas>
+        </div>
+
+
+
+
       </md-card>
 
       <!--Shows workers panel-->

@@ -14,6 +14,7 @@ import 'hammerjs';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     MaterialModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    ChartsModule
   ],
   providers: [],
   entryComponents: [DialogComponent],
