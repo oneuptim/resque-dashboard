@@ -31,3 +31,9 @@ html, body {
 .mat-toolbar-row {
     padding-left: 30px;
 }
+
+.chart-container {
+    display: block;
+    width: 400px;
+    height: 400px;
+}

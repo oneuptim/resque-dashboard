@@ -48,10 +48,10 @@
         <p>Queue Name <br><span>{{selectedItem.queue}}</span></p>
         <p>Size <br><span class="default">{{selectedItem.size}}</span></p>            
 
-        <div style="display: block">
+        <div class="chart-container">
           <canvas baseChart
-            [data]="doughnutChartData"
             [labels]="doughnutChartLabels"
+            [data]="doughnutChartData"
             [chartType]="doughnutChartType"
             (chartHover)="chartHovered($event)"
             (chartClick)="chartClicked($event)">

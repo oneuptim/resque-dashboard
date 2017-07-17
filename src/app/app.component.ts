@@ -242,11 +242,11 @@ export class AppComponent {
   }
 
   // Doughnut
-  public doughnutChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
+  public doughnutChartLabels:string[] = ['Stats', 'Redis', 'Server'];
   public doughnutChartData:number[] = [350, 450, 100];
   public doughnutChartType:string = 'doughnut';
  
-  // events
+  // Chart events
   public chartClicked(e:any):void {
     console.log(e);
   }
