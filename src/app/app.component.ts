@@ -136,7 +136,6 @@ export class AppComponent {
 
     this.getChecksumsData().subscribe((data) => {
       this.checksums = data;
-      // console.log(data);
     });
 
     this.keysCtrl = new FormControl();

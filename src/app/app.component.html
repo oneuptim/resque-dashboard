@@ -15,8 +15,7 @@
     </md-autocomplete>
 
       <!--<input type="search" id="expanding-search" [(ngModel)]="term">-->
-
-  </md-toolbar>
+  </md-toolbar>  
 
   <md-sidenav-container fxFlex>
     <md-sidenav mode="side" opened>
@@ -42,12 +41,13 @@
     <div class="content" fxLayout="row" fxLayout.sm="column" fxLayoutGap="16px">
 
       <!--Shows Queues panel-->
-      <md-card fxFlex="60" *ngIf="switchDetailsView == 0">
+      <md-card fxFlex="60" *ngIf="switchDetailsView == 0">        
         <h3>{{selectedItem.title}}</h3>
         <md-divider flex></md-divider>
         <p>Queue Name <br><span>{{selectedItem.queue}}</span></p>
-        <p>Size <br><span class="default">{{selectedItem.size}}</span></p>            
-      </md-card>
+        <p>Size <br><span class="default">{{selectedItem.size}}</span></p>                              
+        <loading-spinner *ngIf="showSpinner"></loading-spinner>                          
+      </md-card>      
 
       <!--Shows workers panel-->
       <md-card fxFlex="60" *ngIf="switchDetailsView == 1">
@@ -62,7 +62,7 @@
         <p>Failed<br><span class="danger">{{selectedWorker.status.failed}}</span></p>  
         <p>Heartbeat<br><span>{{selectedWorker.status.heartbeat | date:'medium'}}</span></p>
         <p>Processed<br><span>{{selectedWorker.status.processed}}</span></p>          
-        <p>Started<br><span>{{selectedWorker.status.started | date:'medium'}}</span></p>
+        <p>Started<br><span>{{selectedWorker.status.started | date:'medium'}}</span></p>                    
       </md-card>
 
       <!--Shows Keys panel-->
@@ -71,7 +71,7 @@
         <md-divider flex></md-divider>
         <h3>Key: {{selectedKey.key}}</h3>
         <p>Size <br><span>{{selectedKey.size}}</span></p>
-        <p>Type <br><span class="default">{{selectedKey.type}}</span></p>            
+        <p>Type <br><span class="default">{{selectedKey.type}}</span></p>  
       </md-card>
 
       <md-card fxFlex fxLayout="column" fxLayoutGap="14px">
@@ -127,4 +127,8 @@
     <md-icon>add</md-icon>
   </button>-->
 
+</div>
+
+<div class="container">
+  <router-outlet></router-outlet>
 </div>

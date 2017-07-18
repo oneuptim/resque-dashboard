@@ -3,6 +3,8 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 
+import { routes } from './app.router';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -25,6 +27,7 @@ import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.co
     LoadingSpinnerComponent,
   ],
   imports: [
+    routes,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
