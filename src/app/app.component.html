@@ -47,20 +47,6 @@
         <md-divider flex></md-divider>
         <p>Queue Name <br><span>{{selectedItem.queue}}</span></p>
         <p>Size <br><span class="default">{{selectedItem.size}}</span></p>            
-
-        <div class="chart-container">
-          <canvas baseChart
-            [labels]="doughnutChartLabels"
-            [data]="doughnutChartData"
-            [chartType]="doughnutChartType"
-            (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)">
-          </canvas>
-        </div>
-
-
-
-
       </md-card>
 
       <!--Shows workers panel-->
@@ -82,8 +68,8 @@
       <!--Shows Keys panel-->
       <md-card fxFlex="60" *ngIf="switchDetailsView == 2">
         <p>Key view</p>
-        <h3>Key: {{selectedKey.key}}</h3>
         <md-divider flex></md-divider>
+        <h3>Key: {{selectedKey.key}}</h3>
         <p>Size <br><span>{{selectedKey.size}}</span></p>
         <p>Type <br><span class="default">{{selectedKey.type}}</span></p>            
       </md-card>
@@ -97,6 +83,19 @@
           <p>Workers<br><span> {{resqueObj.workers | number}}</span></p> 
           <p>Working<br><span> {{resqueObj.working | number}}</span></p> 
           <p>Failed<br><span class="danger"> {{resqueObj.failed | number}}</span></p> 
+
+
+          <h3>Server Stats</h3>          
+          <md-divider flex></md-divider>        
+          <div class="chart-container">
+            <canvas baseChart
+              [labels]="doughnutChartLabels"
+              [data]="doughnutChartData"
+              [chartType]="doughnutChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+            </canvas>
+          </div>
 
           <h3>Redis Stats</h3>
           <md-divider flex></md-divider>

@@ -16,7 +16,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ChartsModule } from 'ng2-charts';
 
-
 @NgModule({
   declarations: [
     AppComponent,

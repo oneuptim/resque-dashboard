@@ -10,12 +10,18 @@ import { FormsModule }   from '@angular/forms';
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import "rxjs/add/operator/mergeMap";
 
 import { Pipe, PipeTransform } from '@angular/core';
 import {MdGridListModule} from '@angular/material';
 import {MdAutocompleteModule} from '@angular/material';
 
+import { IntervalObservable } from 'rxjs/observable/IntervalObservable'; // <--- This changes from the first Example!
+import { Observable } from 'rxjs/Rx';
 
+
+
+@Injectable()
 
 @Pipe({name: 'values'})
 export class ValuesPipe implements PipeTransform {
@@ -137,9 +143,15 @@ export class AppComponent {
   viewKeys :any = false;
   keysCtrl :FormControl;
   filteredKeys :any;
+  testingData :any;
 
-
-  constructor(iconRegistry: MdIconRegistry, sanitizer: DomSanitizer, private dialog: MdDialog, private _http:Http) {
+  constructor(
+              private http: Http, 
+              iconRegistry: MdIconRegistry, 
+              sanitizer: DomSanitizer, 
+              private dialog: MdDialog, 
+              private _http:Http
+              ) {
     // To avoid XSS attacks, the URL needs to be trusted from inside of your application.
     const avatarsSafeUrl = sanitizer.bypassSecurityTrustResourceUrl('./assets/avatars.svg');
     iconRegistry.addSvgIconSetInNamespace('avatars', avatarsSafeUrl);
@@ -184,6 +196,22 @@ export class AppComponent {
 
   } // End of constructor
 
+  ngOnInit() {
+    // Call method to make API call every 3 seconds and grab results here.
+   this.getNewValue()
+     .subscribe(
+      (res) => 
+      console.log(res.json(), '<-- data from interval http calls')
+     )
+  }
+
+
+  // Make API Call every 3 seconds and return the most current data
+  getNewValue = () => {
+    return IntervalObservable
+      .create(3000)
+      .mergeMap((i) => this.http.get(this._url))
+  }
 
   filterKeys(val: string) {
     let keysNames = [];
@@ -193,7 +221,6 @@ export class AppComponent {
     return val ? keysNames.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0)
                : keysNames;
   }
-
 
   // Step 1
   private getMonitoringData() {
