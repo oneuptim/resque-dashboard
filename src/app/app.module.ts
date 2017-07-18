@@ -15,12 +15,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ChartsModule } from 'ng2-charts';
+import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DialogComponent,
     DashboardComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,9 @@ import { ChartsModule } from 'ng2-charts';
     BrowserAnimationsModule,
     Ng2SearchPipeModule,
     ChartsModule
+  ],
+   exports: [
+    LoadingSpinnerComponent
   ],
   providers: [],
   entryComponents: [DialogComponent],

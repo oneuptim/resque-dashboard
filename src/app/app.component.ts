@@ -19,6 +19,7 @@ import {MdAutocompleteModule} from '@angular/material';
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable'; // <--- This changes from the first Example!
 import { Observable } from 'rxjs/Rx';
 
+import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 
 
 @Injectable()
@@ -62,59 +63,6 @@ export class ValuesPipe implements PipeTransform {
 
 export class AppComponent {
 
-  states = [
-    'Alabama',
-    'Alaska',
-    'Arizona',
-    'Arkansas',
-    'California',
-    'Colorado',
-    'Connecticut',
-    'Delaware',
-    'Florida',
-    'Georgia',
-    'Hawaii',
-    'Idaho',
-    'Illinois',
-    'Indiana',
-    'Iowa',
-    'Kansas',
-    'Kentucky',
-    'Louisiana',
-    'Maine',
-    'Maryland',
-    'Massachusetts',
-    'Michigan',
-    'Minnesota',
-    'Mississippi',
-    'Missouri',
-    'Montana',
-    'Nebraska',
-    'Nevada',
-    'New Hampshire',
-    'New Jersey',
-    'New Mexico',
-    'New York',
-    'North Carolina',
-    'North Dakota',
-    'Ohio',
-    'Oklahoma',
-    'Oregon',
-    'Pennsylvania',
-    'Rhode Island',
-    'South Carolina',
-    'South Dakota',
-    'Tennessee',
-    'Texas',
-    'Utah',
-    'Vermont',
-    'Virginia',
-    'Washington',
-    'West Virginia',
-    'Wisconsin',
-    'Wyoming',
-  ];
-
   private _url:string = 'assets/data/monitoring.json';
   private _checksumsUrl:string = 'assets/data/versions.json';
   resque :any = {};  
@@ -144,6 +92,7 @@ export class AppComponent {
   keysCtrl :FormControl;
   filteredKeys :any;
   testingData :any;
+  showSpinner: boolean = true;
 
   constructor(
               private http: Http, 
@@ -196,7 +145,7 @@ export class AppComponent {
 
   } // End of constructor
 
-  ngOnInit() {
+  ngOnInit() {  
     // Call method to make API call every 3 seconds and grab results here.
    this.getNewValue()
      .subscribe(
@@ -209,7 +158,7 @@ export class AppComponent {
   // Make API Call every 3 seconds and return the most current data
   getNewValue = () => {
     return IntervalObservable
-      .create(3000)
+      .create(300000)
       .mergeMap((i) => this.http.get(this._url))
   }
 
