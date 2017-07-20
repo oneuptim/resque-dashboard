@@ -1,7 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MdIconRegistry, MdDialog} from '@angular/material';
 import {DomSanitizer} from '@angular/platform-browser';
-import {DialogComponent} from './dialog/dialog.component';
 import {Http, Response} from '@angular/http';
 import {Injectable} from '@angular/core';
 
@@ -16,39 +15,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 import {MdGridListModule} from '@angular/material';
 import {MdAutocompleteModule} from '@angular/material';
 
-import { IntervalObservable } from 'rxjs/observable/IntervalObservable'; // <--- This changes from the first Example!
+import { IntervalObservable } from 'rxjs/observable/IntervalObservable'; 
 import { Observable } from 'rxjs/Rx';
 
+import { DialogComponent } from './dialog/dialog.component';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 
-
 @Injectable()
-
-@Pipe({name: 'values'})
-export class ValuesPipe implements PipeTransform {
-    transform(value: any, args?: any[]): Object[] {
-        let keyArr: any[] = Object.keys(value),
-            dataArr = [],
-            keyName = args[0];
-
-        keyArr.forEach((key: any) => {
-            value[key][keyName] = key;
-            dataArr.push(value[key])
-        });
-
-        if(args[1]) {
-            dataArr.sort((a: Object, b: Object): number => {
-                return a[keyName] > b[keyName] ? 1 : -1;
-            });
-        }
-
-        return dataArr;
-    }
-
-  pipes: [ValuesPipe]
-	// directives: [NgFor, NgIf]
-    
-}
 
 @Component({
   selector: 'app-root',
@@ -56,15 +29,10 @@ export class ValuesPipe implements PipeTransform {
   styleUrls: ['./app.component.css'],
 })
 
+export class AppComponent implements OnInit {
 
-@Injectable()
-
-@Pipe({name: 'keys'})
-
-export class AppComponent {
-
-  private _url:string = 'assets/data/monitoring.json';
-  private _checksumsUrl:string = 'assets/data/versions.json';
+    private _url:string = '../assets/data/monitoring.json';
+  private _checksumsUrl:string = '../assets/data/versions.json';
   resque :any = {};  
   checksums :any = [];
   queues :any = [];
@@ -144,7 +112,7 @@ export class AppComponent {
 
   } // End of constructor
 
-  ngOnInit() {  
+  ngOnInit() {
     // Call method to make API call every 3 seconds and grab results here.
    this.getNewValue()
      .subscribe(
@@ -153,8 +121,7 @@ export class AppComponent {
      )
   }
 
-
-  // Make API Call every 3 seconds and return the most current data
+// Make API Call every 3 seconds and return the most current data
   getNewValue = () => {
     return IntervalObservable
       .create(300000)
@@ -229,7 +196,7 @@ export class AppComponent {
   public chartHovered(e:any):void {
     console.log(e);
   }
-
+  
 }
 
 
@@ -251,3 +218,21 @@ export class AppComponent {
 
 // Add extra
 // Add status
+
+
+
+
+
+
+
+  
+
+
+  
+
+ 
+
+
+
+
+

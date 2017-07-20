@@ -1,7 +1,8 @@
+<router-outlet></router-outlet>
 <div fxLayout="column" fxFlex [class.dark-theme]="isDarkTheme">
 
   <md-toolbar color="primary">
-    <span>Resque Dashboard</span>
+    <!--<span>Resque Dashboard</span>-->
     <!-- Filler that pushes the menu button to the end of the toolbar -->
     <span fxFlex></span>
     <md-input-container>
@@ -100,6 +101,7 @@
           <h3>Redis Stats</h3>
           <md-divider flex></md-divider>
           <p>Redis Version <br><span>{{redis_version}}</span></p>
+          <loading-spinner *ngIf="showSpinner"></loading-spinner>
           <p>Mode <br><span>{{redis_mode}}</span></p>
           <p>OS <br><span>{{os}}</span></p>
           <p>Arch Bits <br><span>{{arch_bits}}</span></p>
@@ -127,8 +129,4 @@
     <md-icon>add</md-icon>
   </button>-->
 
-</div>
-
-<div class="container">
-  <router-outlet></router-outlet>
 </div>
