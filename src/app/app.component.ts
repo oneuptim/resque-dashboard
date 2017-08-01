@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MdIconRegistry, MdDialog} from '@angular/material';
-import {DomSanitizer} from '@angular/platform-browser';
-import {Http, Response} from '@angular/http';
-import {Injectable} from '@angular/core';
+import { MdIconRegistry, MdDialog } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Http, Response } from '@angular/http';
+import { Injectable } from '@angular/core';
 
 import { FormControl } from '@angular/forms';
 import { FormsModule }   from '@angular/forms';
@@ -12,8 +12,8 @@ import 'rxjs/add/operator/map';
 import "rxjs/add/operator/mergeMap";
 
 import { Pipe, PipeTransform } from '@angular/core';
-import {MdGridListModule} from '@angular/material';
-import {MdAutocompleteModule} from '@angular/material';
+import { MdGridListModule } from '@angular/material';
+import { MdAutocompleteModule } from '@angular/material';
 
 import { IntervalObservable } from 'rxjs/observable/IntervalObservable'; 
 import { Observable } from 'rxjs/Rx';
@@ -31,7 +31,7 @@ import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.co
 
 export class AppComponent implements OnInit {
 
-    private _url:string = '../assets/data/monitoring.json';
+  private _url:string = '../assets/data/monitoring.json';
   private _checksumsUrl:string = '../assets/data/versions.json';
   resque :any = {};  
   checksums :any = [];
@@ -61,6 +61,37 @@ export class AppComponent implements OnInit {
   filteredKeys :any;
   testingData :any;
   showSpinner: boolean = true;
+    // Doughnut
+  public doughnutChartLabels:string[] = ['Used Memory Human', 'Memory Peak Human'];
+  public doughnutChartData:number[] = [200, 234];
+  public doughnutChartType:string = 'doughnut';
+
+  public barChartOptions:any = {
+      scaleShowVerticalLines: false,
+      responsive: true
+    };
+    public barChartLabels:string[] = ['Current Snapshot'];
+    public barChartType:string = 'bar';
+    public barChartLegend:boolean = true;
+  
+    public barChartData:any[] = [
+      {data: [0], label: 'Used CPU User'},
+      {data: [0], label: 'Used CPU Sys'}
+    ];
+
+    public barChartTwoOptions:any = {
+      scaleShowVerticalLines: false,
+      responsive: true
+    };
+    public barChartTwoLabels:string[] = ['Current Snapshot'];
+    public barChartTwoType:string = 'bar';
+    public barChartTwoLegend:boolean = true;
+  
+    public barChartTwoData:any[] = [
+      {data: [0], label: 'Used CPU User Children'},
+      {data: [0], label: 'Used CPU Sys Children'}
+    ];
+
 
   constructor(
               private http: Http, 
@@ -86,11 +117,21 @@ export class AppComponent implements OnInit {
       this.arch_bits = data.monitoring_json.stats_overview.redis.arch_bits;
       this.used_memory_human = data.monitoring_json.stats_overview.redis.used_memory_human;
       this.used_memory_peak_human = data.monitoring_json.stats_overview.redis.used_memory_peak_human;
+      console.log(this.used_memory_human, this.used_memory_peak_human)
+      // this.doughnutChartData[0] = this.used_memory_human;
+      // this.doughnutChartData[1] = this.used_memory_peak_human;
       this.mem_allocator = data.monitoring_json.stats_overview.redis.mem_allocator;
+      
       this.used_cpu_sys = data.monitoring_json.stats_overview.redis.used_cpu_sys;
       this.used_cpu_user = data.monitoring_json.stats_overview.redis.used_cpu_user;
+      this.barChartData[0].data[0] = this.used_cpu_user;      
+      this.barChartData[1].data[0] = this.used_cpu_sys;
+
       this.used_cpu_sys_children = data.monitoring_json.stats_overview.redis.used_cpu_sys_children;
       this.used_cpu_user_children = data.monitoring_json.stats_overview.redis.used_cpu_user_children;
+      this.barChartTwoData[0].data[0] = this.used_cpu_sys_children;      
+      this.barChartTwoData[1].data[0] = this.used_cpu_user_children;
+
       this.resqueObj = data.monitoring_json.stats_overview.resque;
       this.selectedItem = this.queues[0];
       this.selectedWorker = this.workers[0];
@@ -124,7 +165,7 @@ export class AppComponent implements OnInit {
 // Make API Call every 3 seconds and return the most current data
   getNewValue = () => {
     return IntervalObservable
-      .create(300000)
+      .create(30000)
       .mergeMap((i) => this.http.get(this._url))
   }
 
@@ -182,11 +223,6 @@ export class AppComponent implements OnInit {
     return extractedValue;
     // return this.keys.filter(x => x.name === name);
   }
-
-  // Doughnut
-  public doughnutChartLabels:string[] = ['Stats', 'Redis', 'Server'];
-  public doughnutChartData:number[] = [350, 450, 100];
-  public doughnutChartType:string = 'doughnut';
  
   // Chart events
   public chartClicked(e:any):void {
@@ -195,6 +231,28 @@ export class AppComponent implements OnInit {
  
   public chartHovered(e:any):void {
     console.log(e);
+  }
+
+  // events
+  public randomize():void {
+    // Only Change 3 values
+    let data = [
+      Math.round(Math.random() * 100),
+      59,
+      80,
+      (Math.random() * 100),
+      56,
+      (Math.random() * 100),
+      40];
+    let clone = JSON.parse(JSON.stringify(this.barChartData));
+    clone[0].data = data;
+    this.barChartData = clone;
+    /**
+     * (My guess), for Angular to recognize the change in the dataset
+     * it has to change the dataset variable directly,
+     * so one way around it, is to clone the data, change it and then
+     * assign it;
+     */
   }
   
 }

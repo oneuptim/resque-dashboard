@@ -5,7 +5,7 @@ import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.co
 
 export const router: Routes = [
     { path: '', redirectTo: 'app-root', pathMatch: 'full' },
-    { path: 'spinner', component: LoadingSpinnerComponent }
+    { path: 'spinner', component: LoadingSpinnerComponent },
 ];
 
 export const routes: ModuleWithProviders = RouterModule.forRoot(router);

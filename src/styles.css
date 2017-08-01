@@ -31,9 +31,14 @@ html, body {
 .mat-toolbar-row {
     padding-left: 30px;
 }
-
+.spacer-300 {
+    margin: 150px 0;
+}
 .chart-container {
     display: block;
     width: 400px;
     height: 400px;
+}
+.bar-chart {
+    display: inline-flex;
 }

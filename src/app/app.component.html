@@ -47,7 +47,36 @@
         <md-divider flex></md-divider>
         <p>Queue Name <br><span>{{selectedItem.queue}}</span></p>
         <p>Size <br><span class="default">{{selectedItem.size}}</span></p>                              
-        <loading-spinner *ngIf="showSpinner"></loading-spinner>                          
+        <loading-spinner *ngIf="showSpinner"></loading-spinner>                      
+        
+          <div class="spacer-300"></div>
+
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+            </canvas>     
+          </div>
+
+          <div class="spacer-300"></div>
+
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartTwoData"
+              [labels]="barChartTwoLabels"
+              [options]="barChartTwoOptions"
+              [legend]="barChartTwoLegend"
+              [chartType]="barChartTwoType"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)">
+            </canvas>     
+          </div>
+
       </md-card>      
 
       <!--Shows workers panel-->
@@ -111,13 +140,10 @@
           <p>Used CPU Sys <br><span>{{used_cpu_sys}}</span></p>
           <p>Used CPU User <br><span>{{used_cpu_user}}</span></p>
           <p>Used CPU Sys Children <br><span>{{used_cpu_sys_children}}</span></p>      
-          <p>Used CPU User Children <br><span>{{used_cpu_user_children}}</span></p>            
+          <p>Used CPU User Children <br><span>{{used_cpu_user_children}}</span></p>    
+
       </md-card>
-
-
-
-     
-      
+          
     </div>
   </md-sidenav-container>
 

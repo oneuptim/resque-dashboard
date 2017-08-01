@@ -2,11 +2,9 @@
   display: flex;
   flex: 1;
 }
-
 md-sidenav {
   width: 320px;
 }
-
 md-sidenav span {
   font-size: 0.8em;
   font-weight: 400;
@@ -15,7 +13,6 @@ md-sidenav span {
 .content {
   padding: 12px;
 }
-
 /deep/ md-icon.avatar {
   overflow: hidden;
   width: 64px;
@@ -23,50 +20,41 @@ md-sidenav span {
   border-radius: 50%;
   margin: 12px;
 }
-
 .fab-bottom-right {
   position: fixed;
   right: 16px;
   bottom: 16px;
 }
-
 /deep/ .mat-list-item-content {
    padding: 30px 55px!important;  
   /*height: auto !important;*/
 }
-
 p span  {
   font-size: 1.2em;
   color: #4caf50;
   font-weight: 100;
 }
-
 .default {
   color: #b7b7b7!important;
 }
  .danger {
   color: #ff0000!important;
 }
-
 .warning {
   color: #e6bf20!important;
 }
-
 .dark-theme .mat-card {
     background: #222324;
     color: white;
 }
-
 .dark-theme .mat-sidenav {
     background-color: #222324;
     color: white;
 }
-
 .dark-theme .mat-sidenav-container {
     background-color: #1e1e1e;
     color: white;
 }
-
 .mat-tab-label[_ngcontent-c5] {
     line-height: 80px!important;
     height: 80px!important;
@@ -80,7 +68,6 @@ p span  {
     font-size: 1.2em;
     font-weight: 200;
 }
-
 input {
 	outline: none;
 }
@@ -94,8 +81,6 @@ input::-webkit-search-decoration,
 input::-webkit-search-cancel-button {
 	display: none; 
 }
-
-
 input[type=search] {
   background: #fff url(https://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 12px center;
   border: solid 1px #fff;
@@ -116,15 +101,12 @@ input[type=search]:focus {
 	-moz-box-shadow: 0 0 5px rgba(109,207,246,.5);
 	box-shadow: 0 0 5px rgba(109,207,246,.5);
 }
-
-
 input:-moz-placeholder {
 	color: #999;
 }
 input::-webkit-input-placeholder {
 	color: #999;
 }
-
 #expanding-search {
 	width: 23px;
 	padding-left: 10px;
@@ -141,7 +123,6 @@ input::-webkit-input-placeholder {
 	background-color: #fff;
 	cursor: auto;
 }
-
 .mat-focused {
 	width: 76%;
 	color: #fff;
